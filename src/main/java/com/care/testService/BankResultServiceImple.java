@@ -1,5 +1,6 @@
 package com.care.testService;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -21,8 +22,9 @@ public class BankResultServiceImple implements BankService {
 	public void execute(Model model) {
 //		Map<String, Object> map = model.asMap();
 //		BankDTO dto = (BankDTO)map.get("dto");
-		int[] result = dao.resultMoney();
-		model.addAttribute("result", result[0]);
+		ArrayList<BankDTO> result = dao.resultMoney();
+		
+		model.addAttribute("result", result.get(0));
 	}
 
 }

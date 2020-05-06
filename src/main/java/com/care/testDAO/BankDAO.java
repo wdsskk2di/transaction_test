@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.ui.Model;
 
 import com.care.DTO.BankDTO;
 
@@ -26,23 +25,20 @@ public class BankDAO {
 	}
 	
 	//통장 금액 확인
-	public Map<String, ArrayList<BankDTO>> resultMoney() {
-		String sql_user = "select * from myaccount";
-		Map<String, ArrayList<BankDTO>> map = new HashMap<String, ArrayList<BankDTO>>();
-		
-		ArrayList<BankDTO> totmoney = null;
+	public ArrayList<BankDTO> resultMoney() {
+		String sql_balance = "select * from balance";
+		ArrayList<BankDTO> arr = new ArrayList<BankDTO>();
 		
 		try {
-			totmoney = (ArrayList<BankDTO>)template.query(
-					sql_user,
+			arr = (ArrayList<BankDTO>)template.query(
+					sql_balance,
 					new BeanPropertyRowMapper<BankDTO>(BankDTO.class)
 			);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		map.put("totmoney", totmoney);
-		return map;
+
+		return arr;
 	}
 	
 	//입금
